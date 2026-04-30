@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: #050510;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    /* Cursor crosshair across the app */
+    cursor: crosshair; 
+}
+
+/* Background 3D Grid effect */
+body::before {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 150%;
+    background: 
+        linear-gradient(rgba(0, 243, 255, 0.15) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.15) 2px, transparent 2px);
+    background-size: 100px 100px;
+    z-index: -1;
+    transform: perspective(600px) rotateX(75deg);
+    transform-origin: center top;
+    animation: moveGrid 3s linear infinite;
+}
+
+@keyframes moveGrid {
+    0% { transform: perspective(600px) rotateX(75deg) translateY(0); }
+    100% { transform: perspective(600px) rotateX(75deg) translateY(100px); }
+}
+
+.hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.score-container {
+    background: rgba(10, 10, 25, 0.6);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    letter-spacing: 2px;
+}
+
+#score, #highscore {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 10px #00f3ff;
+}
+
+.game-wrapper {
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 0 50px rgba(0, 243, 255, 0.15);
+    background: #080816;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    border: 2px solid rgba(0, 243, 255, 0.2);
+    border-radius: 4px;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 5, 16, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 10;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.glow-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 
+        0 0 5px #00f3ff, 
+        0 0 15px #00f3ff, 
+        0 0 30px #00f3ff;
+    animation: pulseTitle 2s infinite alternate;
+}
+
+@keyframes pulseTitle {
+    0% { text-shadow: 0 0 5px #00f3ff, 0 0 15px #00f3ff; }
+    100% { text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff, 0 0 40px #00f3ff; }
+}
+
+.overlay p {
+    color: #a5b4fc;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.overlay p:last-of-type {
+    margin-bottom: 40px;
+}
+
+.gameover-text {
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c, 0 0 40px #ff003c;
+    letter-spacing: 4px;
+}
+
+.end-score {
+    font-size: 1.5rem;
+    color: #e2e8f0;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.end-score span {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #00f3ff;
+    text-shadow: 0 0 15px #00f3ff;
+    margin-left: 10px;
+}
+
+.neon-btn {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #00f3ff;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 
+        0 0 10px rgba(0, 243, 255, 0.4), 
+        inset 0 0 10px rgba(0, 243, 255, 0.4);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.neon-btn:hover {
+    background: #00f3ff;
+    color: #050510;
+    box-shadow: 
+        0 0 20px #00f3ff, 
+        0 0 40px #00f3ff;
+    transform: scale(1.05);
+}
+
+.neon-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- New Fun Mechanics CSS --- */
+
+/* Screen Shake Effect */
+@keyframes shakeAnimation {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+    animation: shakeAnimation 0.4s;
+}
+
+/* Powerup Notification Overlay */
+.powerup-notify {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ffea00;
+    text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00, 0 0 40px #ffea00;
+    letter-spacing: 4px;
+    z-index: 20;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.powerup-notify.hidden {
+    opacity: 0;
+}
+
+.combo-pop {
+    animation: comboScale 0.3s ease-out;
+}
+
+@keyframes comboScale {
+    0% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}

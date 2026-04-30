@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Shooter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Persistent UI overlay (scores) -->
+    <div class="hud">
+        <div class="score-container">
+            <span class="label">SCORE:</span>
+            <span id="score">0</span>
+        </div>
+        <div class="score-container" id="comboContainer" style="display: none; border-color: #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);">
+            <span class="label" style="color:#ffb3d9;">COMBO:</span>
+            <span id="comboMultiplier" style="color:#ff007f; text-shadow: 0 0 10px #ff007f;">x1</span>
+        </div>
+        <div class="score-container">
+            <span class="label">HIGH SCORE:</span>
+            <span id="highscore">0</span>
+        </div>
+    </div>
+    
+    <div id="powerupIndicator" class="powerup-notify hidden">
+        POWERUP!
+    </div>
+
+    <!-- Centered Canvas Container -->
+    <div class="game-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI Overlays -->
+        <div id="startScreen" class="overlay glass">
+            <h1 class="glow-title">NEON SHOOTER</h1>
+            <p>WASD / Mũi tên để di chuyển</p>
+            <p>Chuột để nhắm & Click trái để bắn</p>
+            <button id="startBtn" class="neon-btn">BẮT ĐẦU</button>
+        </div>
+        
+        <div id="gameOverScreen" class="overlay glass hidden">
+            <h1 class="gameover-text">SYSTEM FAILURE</h1>
+            <div class="end-score">ĐIỂM: <span id="finalScore">0</span></div>
+            <button id="restartBtn" class="neon-btn">CHƠI LẠI</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
