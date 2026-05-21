@@ -1,51 +1,151 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Shooter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Nguyen Thi Hai Yen | Portfolio</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Nguyen Thi Hai Yen의 개인 포트폴리오 웹사이트입니다.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icon Library (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Persistent UI overlay (scores) -->
-    <div class="hud">
-        <div class="score-container">
-            <span class="label">SCORE:</span>
-            <span id="score">0</span>
-        </div>
-        <div class="score-container" id="comboContainer" style="display: none; border-color: #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);">
-            <span class="label" style="color:#ffb3d9;">COMBO:</span>
-            <span id="comboMultiplier" style="color:#ff007f; text-shadow: 0 0 10px #ff007f;">x1</span>
-        </div>
-        <div class="score-container">
-            <span class="label">HIGH SCORE:</span>
-            <span id="highscore">0</span>
-        </div>
-    </div>
-    
-    <div id="powerupIndicator" class="powerup-notify hidden">
-        POWERUP!
+    <!-- Dynamic Background -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
     </div>
 
-    <!-- Centered Canvas Container -->
-    <div class="game-wrapper">
-        <canvas id="gameCanvas"></canvas>
-        
-        <!-- UI Overlays -->
-        <div id="startScreen" class="overlay glass">
-            <h1 class="glow-title">NEON SHOOTER</h1>
-            <p>WASD / Mũi tên để di chuyển</p>
-            <p>Chuột để nhắm & Click trái để bắn</p>
-            <button id="startBtn" class="neon-btn">BẮT ĐẦU</button>
+    <!-- Navigation -->
+    <nav class="navbar glass-effect">
+        <div class="nav-content">
+            <div class="logo">YEN.</div>
+            <ul class="nav-links">
+                <li><a href="#hero">홈</a></li>
+                <li><a href="#about">소개</a></li>
+                <li><a href="#skills">스킬</a></li>
+                <li><a href="#contact">연락처</a></li>
+            </ul>
         </div>
-        
-        <div id="gameOverScreen" class="overlay glass hidden">
-            <h1 class="gameover-text">SYSTEM FAILURE</h1>
-            <div class="end-score">ĐIỂM: <span id="finalScore">0</span></div>
-            <button id="restartBtn" class="neon-btn">CHƠI LẠI</button>
-        </div>
-    </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <p class="greeting reveal">안녕하세요, 저는</p>
+                <h1 class="name reveal delay-1">Nguyen Thi Hai Yen<span class="dot">.</span></h1>
+                <h2 class="role reveal delay-2">
+                    <span id="typing-text"></span><span class="cursor">|</span>
+                </h2>
+                <p class="description reveal delay-3">
+                    창의적인 아이디어를 코드로 구현하고, 아름답고 직관적인 사용자 경험을 만드는 것을 좋아합니다.
+                </p>
+                <div class="hero-actions reveal delay-4">
+                    <a href="#contact" class="btn primary-btn">연락하기</a>
+                    <a href="#about" class="btn secondary-btn">더 알아보기</a>
+                </div>
+            </div>
+            <div class="hero-visual reveal delay-2">
+                <div class="glass-card visual-card">
+                    <i class="ph ph-code size-large glow-icon"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="about-content glass-card">
+                <div class="about-text">
+                    <p>안녕하세요! 저는 <strong>Nguyen Thi Hai Yen</strong>입니다.</p>
+                    <p>사용자에게 긍정적인 영향을 미치는 웹사이트와 애플리케이션을 개발하는 데 열정을 가지고 있습니다. 항상 새로운 기술을 배우고 도전하는 것을 즐기며, 문제 해결 과정을 사랑합니다.</p>
+                    <ul class="info-list">
+                        <li><i class="ph ph-user"></i> <strong>이름:</strong> Nguyen Thi Hai Yen</li>
+                        <li><i class="ph ph-map-pin"></i> <strong>위치:</strong> Republic of Korea</li>
+                        <li><i class="ph ph-envelope-simple"></i> <strong>이메일:</strong> hello@example.com</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">My Skills</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="skills-grid">
+                <!-- Skill Card 1 -->
+                <div class="skill-card glass-card hover-lift">
+                    <i class="ph ph-file-html icon-html"></i>
+                    <h3>HTML5 / CSS3</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 2 -->
+                <div class="skill-card glass-card hover-lift">
+                    <i class="ph ph-file-js icon-js"></i>
+                    <h3>JavaScript</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 3 -->
+                <div class="skill-card glass-card hover-lift">
+                    <i class="ph ph-layout icon-design"></i>
+                    <h3>UI/UX Design</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <!-- Skill Card 4 -->
+                <div class="skill-card glass-card hover-lift">
+                    <i class="ph ph-globe icon-web"></i>
+                    <h3>Web Development</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 88%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="contact-content glass-card">
+                <p class="contact-msg">새로운 기회와 흥미로운 프로젝트에 항상 열려있습니다. 언제든지 연락주세요!</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn"><i class="ph ph-github-logo"></i></a>
+                    <a href="#" class="social-btn"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="#" class="social-btn"><i class="ph ph-instagram-logo"></i></a>
+                </div>
+                <a href="mailto:hello@example.com" class="btn primary-btn email-btn">
+                    <i class="ph ph-paper-plane-tilt"></i> 인사말 남기기
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Nguyen Thi Hai Yen. All Rights Reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
